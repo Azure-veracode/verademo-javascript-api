@@ -51,7 +51,7 @@ steps:
     sandboxName: 
     scanType: 'Static, SCA'
     importType: 'All Unmitigated Flaws Violating Policy'
-    workItemType: 'Bug'
+    workItemType: 'Issue'
     # area: '$(system.teamProject)'
     area: 'Azure-veracode'
     overwriteAreaPathInWorkItemsOnImport: true
