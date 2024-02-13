@@ -50,12 +50,10 @@ steps:
     veracodeAppProfile: 'VeraDemo'
     sandboxName: 
     scanType: 'Static, SCA'
-    importType: 'All Unmitigated Flaws Violating Policy'
+    importType: 'All Flaws'
     workItemType: 'Issue'
-    # area: '$(system.teamProject)'
     area: 'Azure-veracode'
     overwriteAreaPathInWorkItemsOnImport: true
-    # iterationPath: '$(system.teamProject)'
     iterationPath: 'Azure-veracode'
     overwriteIterationPath: true
     flawImportLimit: '1000'
