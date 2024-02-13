@@ -52,8 +52,10 @@ steps:
     scanType: 'Static, SCA'
     importType: 'All Unmitigated Flaws Violating Policy'
     workItemType: 'Bug'
-    area: '$(system.teamProject)'
+    # area: '$(system.teamProject)'
+    area: 'Azure-veracode'
     overwriteAreaPathInWorkItemsOnImport: true
-    iterationPath: '$(system.teamProject)'
+    # iterationPath: '$(system.teamProject)'
+    iterationPath: 'Azure-veracode'
     overwriteIterationPath: true
     flawImportLimit: '1000'
