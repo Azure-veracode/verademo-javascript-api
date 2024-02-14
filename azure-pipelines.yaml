@@ -10,50 +10,60 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- task: CopyFiles@2
-  inputs:
-    SourceFolder: './'
-    Contents: '**/*.js'
-    TargetFolder: './veracode'
-- task: ArchiveFiles@2
 
+- task: Bash@3
+  displayName: 'Veracode SCA scan'
   inputs:
-    rootFolderOrFile: './veracode'
-    includeRootFolder: true
-    archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-js.zip'
-    replaceExistingArchive: true
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-js.zip'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
+    targetType: 'inline'
+    script: |
+# export SRCCLR_API_TOKEN="${{parameters.veracode_sca_token}}"
+          export SRCCLR_API_TOKEN=b652df6b-f5f3-4464-9f79-4e3cbcaafe6e
+          curl -sSL https://download.sourceclear.com/ci.sh | bash -s -- scan --update-advisor
 
-- task: Veracode@3
-  inputs:
-    ConnectionDetailsSelection: 'Credentials'
-    apiId: '$(VERACODE_API_ID)'
-    apiKey: '$(VERACODE_API_KEY)'
-    # veracodeAppProfile: '$(system.teamProject)'
-    veracodeAppProfile: 'VeraDemo'
-    version: '$(build.buildNumber)'
-    filepath: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-js.zip'
-    importResults: true
-    maximumWaitTime: '360'
+# - task: CopyFiles@2
+#   inputs:
+#     SourceFolder: './'
+#     Contents: '**/*.js'
+#     TargetFolder: './veracode'
+# - task: ArchiveFiles@2
+
+#   inputs:
+#     rootFolderOrFile: './veracode'
+#     includeRootFolder: true
+#     archiveType: 'zip'
+#     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-js.zip'
+#     replaceExistingArchive: true
+# - task: PublishBuildArtifacts@1
+#   inputs:
+#     PathtoPublish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-js.zip'
+#     ArtifactName: 'drop'
+#     publishLocation: 'Container'
+
+# - task: Veracode@3
+#   inputs:
+#     ConnectionDetailsSelection: 'Credentials'
+#     apiId: '$(VERACODE_API_ID)'
+#     apiKey: '$(VERACODE_API_KEY)'
+#     # veracodeAppProfile: '$(system.teamProject)'
+#     veracodeAppProfile: 'VeraDemo'
+#     version: '$(build.buildNumber)'
+#     filepath: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-js.zip'
+#     importResults: true
+#     maximumWaitTime: '360'
 
 
-- task: Veracode Flaw Importer@3
-  inputs:
-    ConnectionDetailsSelection: 'Credentials'
-    apiId: '$(VERACODE_API_ID)'
-    apiKey: '$(VERACODE_API_KEY)'
-    veracodeAppProfile: 'VeraDemo'
-    sandboxName: 
-    scanType: 'Static, SCA'
-    importType: 'All Flaws'
-    workItemType: 'Issue'
-    area: 'Azure-veracode'
-    overwriteAreaPathInWorkItemsOnImport: true
-    iterationPath: 'Azure-veracode'
-    overwriteIterationPath: true
-    flawImportLimit: '1000'
+# - task: Veracode Flaw Importer@3
+#   inputs:
+#     ConnectionDetailsSelection: 'Credentials'
+#     apiId: '$(VERACODE_API_ID)'
+#     apiKey: '$(VERACODE_API_KEY)'
+#     veracodeAppProfile: 'VeraDemo'
+#     sandboxName: 
+#     scanType: 'Static, SCA'
+#     importType: 'All Flaws'
+#     workItemType: 'Issue'
+#     area: 'Azure-veracode'
+#     overwriteAreaPathInWorkItemsOnImport: true
+#     iterationPath: 'Azure-veracode'
+#     overwriteIterationPath: true
+#     flawImportLimit: '1000'
