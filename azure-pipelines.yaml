@@ -17,7 +17,7 @@ steps:
     targetType: 'inline'
     script: |
 # export SRCCLR_API_TOKEN="${{parameters.veracode_sca_token}}"
-          export SRCCLR_API_TOKEN=b652df6b-f5f3-4464-9f79-4e3cbcaafe6e
+          export SRCCLR_API_TOKEN='b652df6b-f5f3-4464-9f79-4e3cbcaafe6e'
           curl -sSL https://download.sourceclear.com/ci.sh | bash -s -- scan --update-advisor
 
 # - task: CopyFiles@2
