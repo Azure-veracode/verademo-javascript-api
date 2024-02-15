@@ -28,7 +28,7 @@ steps:
 
   inputs:
     # rootFolderOrFile: './veracode'
-    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)'
+    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-js.zip'
     includeRootFolder: true
     archiveType: 'zip'
     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-js.zip'
