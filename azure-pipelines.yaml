@@ -16,8 +16,7 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-# export SRCCLR_API_TOKEN="${{parameters.veracode_sca_token}}"
-          export SRCCLR_API_TOKEN='eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDA2ODU4LCJleHAiOjE3MDY2MTU0MTIsImF1dGhvcml0aWVzIjoiQUdFTlQiLCJqdGkiOiJiYjI1NjA2Ny04MzZiLTQyODctODExOS1iOTgxMGJkYWVhZjciLCJjbGllbnRfaWQiOiIiLCJzY29wZSI6W119.BjLtpetrM07tGpyMQq3TdP3ec2D-Sol5bVu08dmnr_CHogVRARkASs_oOYFpnTET3dWVxA2k965hjxizUxNkn5r0EPoz2-XCXkM4aTzC2tvqPaLyRh6O_kw0Ia8INKNz2uiYRzeMOQS7Lj3HoQat79wij1EYYiSaD8E_7wDUDnk'
+          export SRCCLR_API_TOKEN=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDA5NTkyLCJleHAiOjE3MDc5Nzk2MjIsImF1dGhvcml0aWVzIjoiQUdFTlQiLCJqdGkiOiJhNGI0M2YyOC05Yjg0LTRkOTYtOTUzNS1kODdlMTIyZTAzYmYiLCJjbGllbnRfaWQiOiIiLCJzY29wZSI6W119.SSdjSKdzzF--cIzUfvqPd1HtplYWSTsQ-InZqQA5gIMF9TuKAyB2-WRpa_8GhL33jqyNAZsL-nXlSmSVvnSdwk1ZK68bLtWu4RK4F8Cc24Tk4-4kzPTT5ENr8JU_KCIgo3zOYRCutU4jsDheti62bDlKnT6VHnDuheusIjql2us
           curl -sSL https://download.sourceclear.com/ci.sh | bash -s -- scan --update-advisor
 
 # - task: CopyFiles@2
