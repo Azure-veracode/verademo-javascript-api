@@ -49,10 +49,8 @@ steps:
 
 - task: Veracode@3
   inputs:
-    ConnectionDetailsSelection: 'Credentials'
-    apiId: '$(VERACODE_API_ID)'
-    apiKey: '$(VERACODE_API_KEY)'
-    # veracodeAppProfile: '$(system.teamProject)'
+    ConnectionDetailsSelection: 'Service Connection'
+    AnalysisService: 'veracode'
     veracodeAppProfile: 'VeraDemo'
     version: '$(build.buildNumber)'
     filepath: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-js.zip'
