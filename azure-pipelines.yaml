@@ -11,39 +11,39 @@ pool:
 
 steps:
 
-- task: Bash@3
-  displayName: 'Veracode SCA scan'
-  inputs:
-    targetType: 'inline'
-    script: |
-          export SRCCLR_API_TOKEN=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDA5NTkyLCJleHAiOjE3MDc5Nzk2MjIsImF1dGhvcml0aWVzIjoiQUdFTlQiLCJqdGkiOiJhNGI0M2YyOC05Yjg0LTRkOTYtOTUzNS1kODdlMTIyZTAzYmYiLCJjbGllbnRfaWQiOiIiLCJzY29wZSI6W119.SSdjSKdzzF--cIzUfvqPd1HtplYWSTsQ-InZqQA5gIMF9TuKAyB2-WRpa_8GhL33jqyNAZsL-nXlSmSVvnSdwk1ZK68bLtWu4RK4F8Cc24Tk4-4kzPTT5ENr8JU_KCIgo3zOYRCutU4jsDheti62bDlKnT6VHnDuheusIjql2us
-          curl -sSL https://download.sourceclear.com/ci.sh | bash -s -- scan --update-advisor
-
-- task: CopyFiles@2
-  inputs:
-    SourceFolder: './'
-    Contents: '**/*.js'
-    TargetFolder: './veracode'
-- task: ArchiveFiles@2
-
-  inputs:
-    rootFolderOrFile: './veracode'
-    includeRootFolder: true
-    archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-js.zip'
-    replaceExistingArchive: true
-
-# - task: ArchiveFiles@2
+# - task: Bash@3
+#   displayName: 'Veracode SCA scan'
 #   inputs:
-#     rootFolderOrFile: '$(Build.SourcesDirectory)'
+#     targetType: 'inline'
+#     script: |
+#           export SRCCLR_API_TOKEN=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDA5NTkyLCJleHAiOjE3MDc5Nzk2MjIsImF1dGhvcml0aWVzIjoiQUdFTlQiLCJqdGkiOiJhNGI0M2YyOC05Yjg0LTRkOTYtOTUzNS1kODdlMTIyZTAzYmYiLCJjbGllbnRfaWQiOiIiLCJzY29wZSI6W119.SSdjSKdzzF--cIzUfvqPd1HtplYWSTsQ-InZqQA5gIMF9TuKAyB2-WRpa_8GhL33jqyNAZsL-nXlSmSVvnSdwk1ZK68bLtWu4RK4F8Cc24Tk4-4kzPTT5ENr8JU_KCIgo3zOYRCutU4jsDheti62bDlKnT6VHnDuheusIjql2us
+#           curl -sSL https://download.sourceclear.com/ci.sh | bash -s -- scan --update-advisor
+
+# - task: CopyFiles@2
+#   inputs:
+#     SourceFolder: './'
+#     Contents: '**/*.js'
+#     TargetFolder: './veracode'
+# - task: ArchiveFiles@2
+
+#   inputs:
+#     rootFolderOrFile: './veracode'
 #     includeRootFolder: true
 #     archiveType: 'zip'
 #     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-js.zip'
 #     replaceExistingArchive: true
 
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(Build.SourcesDirectory)'
+    includeRootFolder: true
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    replaceExistingArchive: true
+
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-js.zip'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
     ArtifactName: 'drop'
     publishLocation: 'Container'
 
@@ -53,7 +53,7 @@ steps:
     AnalysisService: 'veracode'
     veracodeAppProfile: 'VeraDemo'
     version: '$(build.buildNumber)'
-    filepath: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-js.zip'
+    filepath: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
     importResults: true
     maximumWaitTime: '360'
 
