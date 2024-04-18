@@ -72,5 +72,6 @@ steps:
     overwriteAreaPathInWorkItemsOnImport: true
     iterationPath: 'Azure-veracode'
     overwriteIterationPath: true
+    addCustomTag: 'deleteIncompleteScan 1'
     flawImportLimit: '1000'
-# 
+#added op tags
