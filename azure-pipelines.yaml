@@ -55,6 +55,7 @@ steps:
     version: '$(build.buildNumber)'
     filepath: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
     importResults: true
+    failBuildOnPolicyFail: true
     maximumWaitTime: '360'
 
 
