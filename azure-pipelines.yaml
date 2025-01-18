@@ -51,11 +51,12 @@ steps:
   inputs:
     ConnectionDetailsSelection: 'Service Connection'
     AnalysisService: 'veracode'
-    veracodeAppProfile: 'VeraDemo'
+    veracodeAppProfile: 'Recent'
     version: '$(build.buildNumber)'
     filepath: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
     importResults: true
     failBuildOnPolicyFail: true
+    toplevel: true
     maximumWaitTime: '360'
 
 
@@ -64,7 +65,7 @@ steps:
     ConnectionDetailsSelection: 'Credentials'
     apiId: '$(VERACODE_API_ID)'
     apiKey: '$(VERACODE_API_KEY)'
-    veracodeAppProfile: 'VeraDemo'
+    veracodeAppProfile: 'Recent'
     sandboxName: 
     scanType: 'Static, SCA'
     importType: 'All Flaws'
