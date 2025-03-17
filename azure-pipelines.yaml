@@ -62,9 +62,8 @@ steps:
 
 - task: Veracode Flaw Importer@3
   inputs:
-    ConnectionDetailsSelection: 'Credentials'
-    apiId: '$(VERACODE_API_ID)'
-    apiKey: '$(VERACODE_API_KEY)'
+    ConnectionDetailsSelection: 'Service Connection'
+    AnalysisService: 'Veracode-Arun-GM'
     veracodeAppProfile: 'Recent'
     sandboxName: 
     scanType: 'Static, SCA'
