@@ -50,13 +50,12 @@ steps:
 - task: Veracode@3
   inputs:
     ConnectionDetailsSelection: 'Service Connection'
-    AnalysisService: 'veracode'
+    AnalysisService: 'Veracode-Arun-GM'
     veracodeAppProfile: 'Recent'
     version: '$(build.buildNumber)'
     filepath: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
     importResults: true
     failBuildOnPolicyFail: true
-    toplevel: true
     maximumWaitTime: '360'
 
 
