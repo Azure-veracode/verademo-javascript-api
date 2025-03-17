@@ -1,0 +1,31 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: Bash@3
+  displayName: 'Install Veracode CLI and Package Scan'
+  inputs:
+    targetType: 'inline'
+    script: |
+      echo "Installing Veracode CLI..."
+      curl -fsS https://tools.veracode.com/veracode-cli/install | sh
+      
+      echo "Running Veracode Auto Packaging..."
+      ./veracode package -das $(Build.SourcesDirectory) --output $(system.defaultworkingdirectory)/pipeline_storage/build
+
+      # Check if packaging succeeded
+      if [ ! -d "$(system.defaultworkingdirectory)/pipeline_storage/build" ] || [ -z "$(ls -A $(system.defaultworkingdirectory)/pipeline_storage/build)" ]; then
+        echo "Error: Packaging failed. No output files found."
+        exit 1
+      fi
+
+      echo "Auto-packaging completed successfully."
+
