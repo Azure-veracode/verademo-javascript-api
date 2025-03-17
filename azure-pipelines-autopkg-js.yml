@@ -1,10 +1,10 @@
 #This script will do the autopackaging and upload and scan in the Veracode portal
 
-trigger:
-- main
+# trigger:
+# - main
 
-pool:
-  vmImage: ubuntu-latest
+# pool:
+#   vmImage: ubuntu-latest
 
 steps:
 - task: Bash@3
