@@ -95,14 +95,14 @@ steps:
     veracodeAppProfile: '$(Retrieving_applicaton_name.app_profile_name)' # App-Profile based on project/repo
     version: '$(build.buildNumber)'
     filepath: '${{parameters.passed_jar_folder}}'
-    createProfile: true
+    createProfile: 'true'
     optargs: '-policy DPW-Veracode-Recommended-SAST-SCA-V2 -teams DPW_Security'
     failBuildIfUploadAndScanBuildStepFails: true
     importResults: true
     failBuildOnPolicyFail: true
     maximumWaitTime: '1440' # 24 hours
-    toplevel : 'True'
-    includenewmodules : 'True'
+    toplevel : true
+    includenewmodules : true
     deleteincompletescan: 0
   displayName: POLICY SCAN
   condition: succeededOrFailed()
