@@ -1,0 +1,31 @@
+This script will do the autopackaging and upload and scan in the Veracode portal
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: Bash@3
+  displayName: 'Install Veracode CLI and Package Scan'
+  inputs:
+    targetType: 'inline'
+    script: |
+      curl -fsS https://tools.veracode.com/veracode-cli/install | sh
+      ./veracode package -das $(Build.SourcesDirectory) --output ./verascan
+
+      # Check if the verascan directory exists
+      if [ ! -d "verascan" ]; then
+        echo "Error: verascan directory not found."
+        exit 1
+      fi
+
+- task: VeracodePipelineScan@0
+  inputs:
+    serviceConnection: 'Veracode-Arun-GM'
+    fileToScan: './verascan'
+    policyName: 'policy DPW-Veracode-Recommended-SAST-SCA-V2 -teams DPW_Security'
+    breakPipeline: true
+    baselineFileGeneration: true
+    baselineFileStorageReponame: 'Azure-veracode'
