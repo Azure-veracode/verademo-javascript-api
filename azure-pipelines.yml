@@ -1,4 +1,4 @@
-This script will do the autopackaging and upload and scan in the Veracode portal
+# This script will do the autopackaging and upload and scan in the Veracode portal
 
 trigger:
 - main
