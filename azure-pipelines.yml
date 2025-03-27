@@ -30,4 +30,4 @@ steps:
     baselineFileGeneration: true
     baselineFileStorageProject: 'Azure-veracode'
     baselineFileStorageReponame: 'Azure-veracode'
-    baselineFileStorageBranch: 'refs/heads/dependabot/maven/app/commons-io-commons-io-2.14.0'
+    baselineFileStorageBranch: 'refs/heads/main'
