@@ -21,13 +21,21 @@ steps:
         exit 1
       fi
 
-- task: VeracodePipelineScan@0
+- script: |
+    curl -O -L https://downloads.veracode.com/securityscan/pipeline-scan-LATEST.zip
+  displayName: "Download Pipeline Scan"
+- task: ExtractFiles@1
   inputs:
-    serviceConnection: 'Veracode-Arun-GM'
-    fileToScan: './verascan'
-    policyName: 'policy DPW-Veracode-Recommended-SAST-SCA-V2 -teams DPW_Security'
-    breakPipeline: true
-    baselineFileGeneration: true
-    baselineFileStorageProject: 'Azure-veracode'
-    baselineFileStorageReponame: 'Azure-veracode'
-    baselineFileStorageBranch: 'refs/heads/main'
+    archiveFilePatterns: "pipeline-scan-LATEST.zip"
+    destinationFolder: "pipeline"
+    cleanDestinationFolder: false
+- script: |
+    java -jar pipeline\pipeline-scan.jar --veracode_api_id "$(VERACODE_API_ID)" --veracode_api_key "$(VERACODE_API_KEY)" --file "./verascan" --json_output_file="baseline.json" || true
+    # Pipeline Scan command. VERACODE_API_ID and VERACODE_API_KEY must reference your API credentials.
+    # "--json_output_file" saves scan results as a JSON file that you can use as a baseline file.
+  env:
+    VERACODE_API_ID: $(VERACODE_API_ID)
+    VERACODE_API_KEY: $(VERACODE_API_KEY)
+  displayName: "Run Pipeline Scan"
+- publish: $(System.DefaultWorkingDirectory)/baseline.json
+  artifact: baseline
