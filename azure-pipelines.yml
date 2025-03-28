@@ -30,6 +30,7 @@ steps:
     destinationFolder: "pipeline"
     cleanDestinationFolder: false
 - script: |
+    ls
     java -jar pipeline\pipeline-scan.jar --veracode_api_id "$(VERACODE_API_ID)" --veracode_api_key "$(VERACODE_API_KEY)" --file "./verascan" --json_output_file="baseline.json" || true
     # Pipeline Scan command. VERACODE_API_ID and VERACODE_API_KEY must reference your API credentials.
     # "--json_output_file" saves scan results as a JSON file that you can use as a baseline file.
