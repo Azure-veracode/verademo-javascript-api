@@ -48,7 +48,7 @@ steps:
     veracodeAppProfile: 'Recent'
     version: '$(build.buildNumber)'
     filepath: './verascan'
-    sandboxName: 'Test1'
+    sandboxName: 'Test2'
     createSandBox: true
     optargs: '-deleteincompletescan 2'
     failBuildIfUploadAndScanBuildStepFails: true
