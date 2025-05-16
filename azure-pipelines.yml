@@ -50,7 +50,7 @@ steps:
     filepath: './verascan'
     sandboxName: 'Test'
     createSandBox: true
-    optargs: '-deleteincompletescan 0'
+    optargs: '-deleteincompletescan 2'
     failBuildIfUploadAndScanBuildStepFails: true
     importResults: true
     maximumWaitTime: '360'
